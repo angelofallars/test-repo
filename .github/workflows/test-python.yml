@@ -1,0 +1,32 @@
+name: Test Python
+
+on: [push, pull_request]
+
+jobs:
+  test:
+
+    runs-on: ubuntu-latest
+    container:
+      image: archlinux
+
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v2
+
+    - name: Set up Python 3.9
+      uses: actions/setup-python@v2
+      with:
+        python-version: 3.9
+
+    - name: Install packages
+      run: |
+        pacman -Syu --noconfirm
+        pacman -S python git --noconfirm --needed
+
+    - name: Install dirget
+      run: |
+        git clone https://github.com/angelofallars/dirget.git
+
+    - name: Run dirget
+      run: |
+        python dirget/main.py
