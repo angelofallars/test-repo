@@ -23,10 +23,10 @@ jobs:
         pacman -Syu --noconfirm
         pacman -S python git --noconfirm --needed
 
-    - name: Install dirget
+    - name: Make a basic Python script
       run: |
-        git clone https://github.com/angelofallars/dirget.git
+        echo "print('Hello world!')" > hello.py
 
     - name: Run dirget
       run: |
-        python dirget/main.py
+        python hello.py
